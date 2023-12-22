@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign Details</title>
+    <!-- CSS files -->
+    <link href="/stylesheets/css/tabler.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/demo.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/customize.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../node_modules/cropperjs/dist/cropper.min.css">
+  </head>
+  <body>
+    <!-- admin nav start  -->
+    <div class="mb-2">
+      <header class="navbar navbar-expand-md navbar-dark d-print-none">
+        <div class="container-xl">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar-menu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1
+            class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3"
+          >
+            <a href="/admin"> Easy Vote </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <a
+              href="?theme=dark"
+              class="nav-link px-0 hide-theme-dark"
+              title="Enable dark mode"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+            >
+              <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+                />
+              </svg>
+            </a>
+            <a
+              href="?theme=light"
+              class="nav-link px-0 hide-theme-light"
+              title="Enable light mode"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+            >
+              <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+                />
+              </svg>
+            </a>
+            <div class="nav-item dropdown d-none d-md-flex me-3"></div>
+            <div class="nav-item dropdown">
+              <a
+                href="#"
+                class="nav-link d-flex lh-1 text-reset p-0"
+                data-bs-toggle="dropdown"
+                aria-label="Open user menu"
+              >
+                <span
+                  class="avatar avatar-sm"
+                  style="background-image: url(/images/svg/admin-profile.svg)"
+                ></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <span>
+                  <img
+                  style="margin-left: 10px;"
+                    src="/images/svg/admin-user-name.svg"
+                    alt="Name"
+                    width="20px"
+                  />
+                  Admin
+                </span><br>
+                <span>
+                  <img
+                    style="margin-left: 10px;"
+                    src="/images/svg/admin-user-mail.svg"
+                    alt="Mail"
+                    width="20px"
+                  />
+                 admin@gmail.com
+                </span>
+                <div class="dropdown-divider"></div>
+                <a href="/admin/change-password" class="dropdown-item">Change Password</a>
+                <a href="/admin/logout" class="dropdown-item">Logout</a>
+              </div>
+            </div>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-menu">
+            <div
+              class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center"
+            >
+              <ul class="navbar-nav">
+                <li class="nav-item ">
+                  <a class="nav-link" href="/admin">
+                    <span class="nav-link-title"> Dashboard </span>
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="/admin/campaign-list">
+                    <span class="nav-link-title"> Campaign List </span>
+                  </a>
+                </li> -->
+                <li class="nav-item ">
+                  <a class="nav-link" href="/admin/king-queen">
+                    <span class="nav-link-title">King & Queen selection</span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/admin/project">
+                    <span class="nav-link-title">Project Communication</span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/admin/other">
+                    <span class="nav-link-title">Other</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/create">
+                    <span class="nav-link-title">Create</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <!-- admi nav end  -->
+
+
+    <div>
+       
+        <h2></h2>
+        <img src="" alt=""> 
+
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="col-3"></div>
+          <div class="col-1"></div>
+        </div>
+        
+        
+      
+    </div>
+
+    <div class="container-xl">
+      <div class="card" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col-lg-8 col-md-8 col-sm-12" style="padding: 10px 0px 0px 15px;">
+            <img src="<%= data.image %>" alt="" width="100%">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 10px;">
+            <h3>Title : <%= data.title %></h3>
+            <h3>Create Date : <%= data.create %></h3>
+            <h3>End Date : <%= data.endDate %></h3>
+            <% if(typeof data.update !== 'undefined'){ %>
+              <h3>Update : <%= data.update %></h3>
+            <% } %>
+                <h2>Description</h2>
+                <p><%= data.description %></p>
+          </div>
+        </div>
+        <% if(data.status == 'start'){ %> 
+        <div class="card-footer" style="text-align: end;padding:30px;">
+          <a href="/admin/campaign-update/<%= data.id %>" class="btn btn-outline-secondary">update campaign </a>  
+          <a href="/admin/campaign-data/<%= data.id %>" class="btn btn-primary">add campaign list</a>
+        </div>
+        <% } %>
+        <div class="row" style="padding: 20px;">
+        <% for(var i = 0; i < user.length; i++) { %>
+          <div class="card col-lg-4 col-md-4 col-sm-6" style="padding: 10px;">
+            <div class="row">
+              <div class="col-6 card" style="padding: 5px;">
+                <img src="<%= user[i].image %>" alt="" width="384px" height="192px">
+              </div>
+              <div class="col-6">
+                <h4>Name : <%= user[i].name %></h4>
+                <h4>Total Vote : <%= user[i].count %></h4>
+                <% if(typeof user[i].updateDate !== 'undefined') { %>
+                  <h4>Update : <%= user[i].updateDate %></h4>
+                <% } %>
+                <h4>Description</h4>
+                <p><%= user[i].description %></p>
+              </div>
+            </div>
+            <% if(data.status == 'start'){ %> 
+            <div style="text-align: end;">
+              <a href="/admin/campaign-data-update/<%= user[i].id %>" class="btn btn-outline">Update</a>
+              <input class="btn btn-danger userDeleted" style="width: 100px;" data-id="<%= user[i].id %>" value="Delete" readonly >
+            </div>
+            <% } %>
+          </div>
+          <% } %>
+        </div>
+        <div style="border: 1px solid gray;"></div>
+        <div style="text-align: end; margin: 10px 30px 10px 0px">
+          <% if(data.status === "start"){ %> 
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+              <div class="col-4">
+                <div class="row" style="margin-bottom: 10px;">
+                  <div class="col-6">
+                    <label class="form-label" style="text-align: start;">Choose Hour</label>
+                    <select id="hour" class="form-select">
+                      <option class="text-primary" style="font-weight: bold;" disabled>Hour</option>
+                      <option value="0" selected>00</option>
+                      <option value="1" >01</option>
+                      <option value="2" >02</option>
+                      <option value="3" >03</option>
+                      <option value="4" >04</option>
+                      <option value="5" >05</option>
+                      <option value="6" >06</option>
+                      <option value="7" >07</option>
+                      <option value="8" >08</option>
+                      <option value="9" >09</option>
+                      <option value="10" >10</option>
+                      <option value="11" >11</option>
+                      <option value="12" >12</option>
+                      <option value="13" >13</option>
+                      <option value="14" >14</option>
+                      <option value="15" >15</option>
+                      <option value="16" >16</option>
+                      <option value="17" >17</option>
+                      <option value="18" >18</option>
+                      <option value="19" >19</option>
+                      <option value="20" >20</option>
+                      <option value="21" >21</option>
+                      <option value="22" >22</option>
+                      <option value="23" >23</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" style="text-align: start;">Choose Minutes</label>
+                    <select id="minutes" class="form-select">
+                      <option class="text-primary" style="font-weight: bold;" disabled>Minutes</option>
+                      <option value="0" selected>00</option>
+                      <option value="5" >05</option>
+                      <option value="10" >10</option>
+                      <option value="15" >15</option>
+                      <option value="20" >20</option>
+                      <option value="25" >25</option>
+                      <option value="30" >30</option>
+                      <option value="35" >35</option>
+                      <option value="40" >40</option>
+                      <option value="45" >45</option>
+                      <option value="50" >50</option>
+                      <option value="55" >55</option>
+                      <option value="59" >59</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+          </div> 
+            <a href="/admin/change-status?status=open&id=<%= data.id %>" class="btn btn-primary open" style="width: auto ;" data-campid="<%= data.id %>">Open Campaign</a>
+          <% }else if(data.status === "close"){ %>
+            <a href="/admin/change-status?status=close&id=<%= data.id %>" class="btn btn-primary" style="width: auto ;" >Close Campaign</a>
+          <% }else if(data.status === "finish"){ %> 
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4"></div>
+              <div class="col-4">
+                <div class="row" style="margin-bottom: 10px;">
+                  <div class="col-6">
+                    <label class="form-label" style="text-align: start;">Choose Hour</label>
+                    <select id="hour" class="form-select">
+                      <option class="text-primary" style="font-weight: bold;" disabled>Hour</option>
+                      <option value="0" selected>00</option>
+                      <option value="1" >01</option>
+                      <option value="2" >02</option>
+                      <option value="3" >03</option>
+                      <option value="4" >04</option>
+                      <option value="5" >05</option>
+                      <option value="6" >06</option>
+                      <option value="7" >07</option>
+                      <option value="8" >08</option>
+                      <option value="9" >09</option>
+                      <option value="10" >10</option>
+                      <option value="11" >11</option>
+                      <option value="12" >12</option>
+                      <option value="13" >13</option>
+                      <option value="14" >14</option>
+                      <option value="15" >15</option>
+                      <option value="16" >16</option>
+                      <option value="17" >17</option>
+                      <option value="18" >18</option>
+                      <option value="19" >19</option>
+                      <option value="20" >20</option>
+                      <option value="21" >21</option>
+                      <option value="22" >22</option>
+                      <option value="23" >23</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label" style="text-align: start;">Choose Minutes</label>
+                    <select id="minutes" class="form-select">
+                      <option class="text-primary" style="font-weight: bold;" disabled>Minutes</option>
+                      <option value="0" selected>00</option>
+                      <option value="5" >05</option>
+                      <option value="10" >10</option>
+                      <option value="15" >15</option>
+                      <option value="20" >20</option>
+                      <option value="25" >25</option>
+                      <option value="30" >30</option>
+                      <option value="35" >35</option>
+                      <option value="40" >40</option>
+                      <option value="45" >45</option>
+                      <option value="50" >50</option>
+                      <option value="55" >55</option>
+                      <option value="59" >59</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+          </div>
+            <a href="/admin/change-status?status=finish&id=<%= data.id %>" class="btn btn-primary open" style="width: auto ;" data-campid="<%= data.id %>">Reopen Campaign</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+      <!-- footer start  -->
+    <footer class="footer footer-transparent d-print-none">
+      <div class="container-xl">
+        <div class="row text-center align-items-center flex-row-reverse">
+          <div class="col-lg-auto ms-lg-auto">
+            <ul class="list-inline list-inline-dots mb-0">
+              <li class="list-inline-item">
+                <a href="./docs/index.html" class="link-secondary"
+                  >Documentation</a
+                >
+              </li>
+              <li class="list-inline-item">
+                <a href="./license.html" class="link-secondary">License</a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  href="https://github.com/tabler/tabler"
+                  target="_blank"
+                  class="link-secondary"
+                  rel="noopener"
+                  >Source code</a
+                >
+              </li>
+              <li class="list-inline-item">
+                <a
+                  href="https://github.com/sponsors/codecalm"
+                  target="_blank"
+                  class="link-secondary"
+                  rel="noopener"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon text-pink icon-filled icon-inline"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
+                    />
+                  </svg>
+                  Easy Vote
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+            <ul class="list-inline list-inline-dots mb-0">
+              <li class="list-inline-item">
+                Copyright &copy; 2022
+                <a href="." class="link-secondary">Easy Vote</a>. All rights
+                reserved.
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end  -->
+      </div>
+    </div>
+    <!-- body end  -->
+
+
+    <script src="/javascripts/js/demo.min.js"></script>
+    <script src="/javascripts/js/tabler.min.js"></script>
+    <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
+    <script src="/javascripts/js/cropperjs"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      $(".userDeleted").click(function(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              let id = $(this).data("id")
+              $.ajax({
+                url:"/admin/user-delete",
+                data:{id},
+                type: 'POST'
+              }).done(function(result){
+                  if(result.status == "error"){
+                  alert("somethings was wrong!")
+                  }else{
+                    location.reload();
+                  }
+                })
+            }
+          })
+      })
+
+
+
+
+    </script>
+    <script>
+
+      $(".open").click(function(){
+        let hour = $("#hour").val();
+        let minutes = $("#minutes").val();
+        let campid = $(this).data("campid")
+        $.ajax({
+                url:"/admin/change-status",
+                data:{hour, minutes, campid},
+                type: 'POST'
+              })
+      })
+      
+    </script>
+  </body>
+</html>

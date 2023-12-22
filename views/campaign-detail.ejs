@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign Detail</title>
+    <!-- CSS files -->
+    <link href="/stylesheets/css/tabler.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/demo.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fugaz One"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Gentium Book Basic"
+    />
+    <style>
+      .tit {
+        font-family: "Fugaz One", serif;
+      }
+      .dtit {
+        font-family: "Gentium Book Basic", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav start  -->
+    <% include ./partials/nav %>
+    <!-- nav end -->
+
+    <div class="container">
+      <h1 class="tit" style="margin-top: 10px">Campanign Detail</h1>
+      <hr />
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 card" style="padding: 5px">
+          <img src="<%= campaign.image %>" alt="" />
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 10px;">
+          <h3 class="dtit">Campaign Title : <%= campaign.title %></h3>
+          <h3 class="dtit">Create Date : <%= campaign.create %></h3>
+          <h3 class="dtit">End Date : <%= campaign.endDate %></h3>
+          <h3 class="dtit">Description</h2>
+          <p>
+            <%= campaign.description %>
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div>
+        <% let vote = campaign.vote %>
+        <% if(locals.user && vote.some(votes => votes.user == locals.user.id)){ %> 
+          <h1 class="tit">Total Vote</h1>
+          <hr />
+          <table class="table card-table table-vcenter">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th colspan="2">Voter quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var k = 0; k < campaignData.length;  k++){ %> 
+              <tr>
+                <td><%= campaignData[k].name %></td>
+                <td><%= campaignData[k].count %></td>
+                <td class="w-50">
+                    <% let campcount = campaign.vote.length %>
+                    <% let campdata = campaignData[k].count %>
+                    <% let result = (campdata / campcount)*100 %>
+                    <% let results = (result == 'Infinity' ? 0 : result) %>
+                    <div class="progress progress-xs">
+                    <div class="progress-bar bg-primary" style="width:<%= Math.round(results)  %>%"><%= Math.round(results)  %>%</div>
+                  </div>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        <% }else { %> 
+          <h1 class="tit">Campaign List</h1>
+          <hr />
+          <div class="row" style="padding: 5px">
+            <% for(var i = 0; i < campaignData.length; i ++){ %> 
+              <div class="card col-lg-3 col-md-4 col-sm-6">
+                <div class="row">
+                  <div class="card" style="padding: 5px">
+                    <div style="text-align: center">
+                      <h1 class="card-title dtit" style="font-size: 25px;"><%= campaignData[i].name %></h1>
+                    </div>
+                    <img
+                      src="<%= campaignData[i].image %>"
+                      alt=""
+                      width="384px"
+                      height="192px"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h3 class="dtit">Description</h3>
+                  <p style="height: 50px;">
+                    <%= campaignData[i].description %>
+                  </p>
+                </div>
+                <% if(locals.user) { %> 
+                  <% if(campaign.status == 'close') { %> 
+                    <div style="margin-bottom: 10px;">
+                          <div  style="text-align: end">
+                            <button class="btn btn-success vote" data-id="<%= campaign.id %>" data-type ="vote" data-camp="<%= campaignData[i].id %>"> vote</button>
+                          </div>
+                    </div>
+                  <% }else{ %> 
+                    <% if(campaign.status == 'finish') { %> 
+                      <h3 class="dtit text-warning card" style="text-align: center;">The campaign has been closed</h3>
+                    <% }else{ %> 
+                      <h3 class="dtit text-warning card" style="text-align: center;">The campaign is not open yet</h3>
+                    <% } %>
+                  <% } %>
+                <% }else { %> 
+                  <h2 class="dtit text-warning card" style="text-align: center;">Login to vote</h2>
+                <% } %>
+              </div>
+              <% } %>
+          </div>
+          <% if(locals.user && campaign.status == 'close') { %>
+            <div style="text-align: end;">
+              <div style="border: 1px solid rgba(36, 35, 35, 0.664); margin-bottom: 5px;"></div>
+              <a href="/final-camp?userId=<%= locals.user.id %>&campId=<%= campaign.id %>" class="btn btn-primary">Done</a>
+            </div>
+            <% } %>
+        <% } %>
+      </div>
+
+      
+    </div>
+
+    <!-- footer start  -->
+    <% include ./partials/footer %>
+    <!-- footer end -->
+
+    <script src="/javascripts/js/demo.min.js"></script>
+    <script src="/javascripts/js/tabler.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(".vote").click(function() {
+        $(".vote").not(this).attr("disabled", true)
+        $(this).html("unvote")
+        refreshVote()
+        showAbout($(this).data("id"),$(this).data("camp"), $(this).data("type"));
+        if($(this).data("type") == "vote") $(this).data("type", "unvote");
+        else $(this).data("type", "vote");
+      })
+        
+      function refreshVote() {
+        $('.vote').click(function(){
+          $(this).html("vote");
+          $(".vote").attr("disabled", false)
+          location.reload()
+        })
+      }
+
+      function showAbout(id,camp,type){
+        let data = {id,camp,type }
+        $.ajax({
+          url:"/give-vote",
+          data:data,
+          type:"POST"
+        }).done(function(result){
+          if(result.status == "error"){
+            alert("somethings was wrong!")
+          }
+        })
+        }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Easy Vote</title>
+    <!-- CSS files -->
+    <link href="/stylesheets/css/tabler.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/demo.min.css" rel="stylesheet" />
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Permanent Marker">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Serif Text">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fugaz One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous">
+    <style>
+      .font{
+        font-family:'Permanent Marker', serif;
+      }
+      .font1{
+        font-family: 'Alice', serif;
+      }
+      .tit{
+        font-family: 'Fugaz One', serif;
+      }
+      .cmptit {
+        font-family: 'DM Serif Text', serif;
+        font-size: 20px;
+      }
+      .logo {
+        font-family: 'Righteous', serif;
+        font-size: 30px;
+      }
+      .move{
+        padding: 50px 10px 10px 40px;
+        font-size: 30px;
+        color: rgb(8, 6, 6);
+        font-weight: lighter;
+      }
+      .text{
+        margin: 50px 10px 10px 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <% include ./partials/nav %>
+
+    <div>
+      <div style="padding: 10px;">
+        <img src="/images/img/universtry.jpg" alt="">
+      </div>
+      <div  style="background-color: rgb(255, 255, 255); width:100%; height: 55vh;" class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <img src="/images/img/vote-bg.jpg" alt="" >
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 50px;">
+          <div class="text">
+            <div class="font">
+              <h1>Voting for University</h1>
+            </div> 
+            <div >
+              <p class=" font1">A Voting Platform for Any University Vote Online.Click start for voting and your account is ready to use.</p>
+              <% if(locals.user) { %> 
+                <h1 class="font">Welcome!</h1>
+                <h2 class="tit"><%= locals.user.name %></h2>
+              <% }else { %> 
+              <a href="/sign-up" class="btn btn-outline-secondary font1" style="margin: 10px 0px 0px 50px; width:200px; height: 50px;">Start For Voting</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <h2><%= locals.user ? locals.user.email : 'Unknow User' %></h2> -->
+      <div style="padding: 20px;margin-top: 80px;">
+      <div style="border-bottom: 1px solid rgb(80, 79, 79);margin-bottom: 20px;"></div>
+        <h2 class="tit" style="margin-bottom: 30px;">King & Queen Selection Recent Campaign</h2>
+        <div class="row">
+          <% for(var i = 0; i < king.length; i++){ %> 
+          <div class="card col-lg-4 col-md-4 col-sm-6">
+            <h1 class="card-title cmptit" style="text-align: center; margin-top: 5px;"><%= king[i].title %></h1>
+            <img src="<%= king[i].image %>" alt="">
+            <a href="/campaign-detail/<%= king[i].id %>" class="card-footer btn btn-primary">View</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <!-- project  -->
+      <hr>
+      <div class="mt-3" style="padding:20px">
+        <h2 class="tit" style="margin-bottom: 30px;">Project Competition Recent Campaign</h2>
+        <div class="row">
+          <% for(var k = 0; k < project.length; k++) {%> 
+          <div class="card col-lg-4 col-md-4 col-sm-6">
+            <h1 class="card-title cmptit" style="text-align: center; margin-top: 5px;"><%= project[k].title %></h1>
+            <img src="<%= project[k].image %>" alt="">
+            <a href="/campaign-detail/<%= project[k].id %>" class="card-footer btn btn-primary">View</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <!-- other  -->
+      <hr>
+      <div class="mt-3" style="padding: 20px;">
+        <h2 class="tit" style="margin-bottom: 30px;">Other Recent Campaign</h2>
+        <div class="row">
+          <% for(var j = 0; j < other.length; j++){ %> 
+          <div class="card col-lg-4 col-md-4 col-sm-6">
+            <h1 class="card-title cmptit" style="text-align: center; margin-top: 5px;"><%= other[j].title %></h1>
+            <img src="<%= other[j].image %>" alt="">
+            <a href="/campaign-detail/<%= other[j].id %>" class="card-footer btn btn-primary">View</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer start  -->
+    <% include ./partials/footer %>
+    <!-- footer end -->
+      </div>
+    <!-- vote list end  -->
+
+ 
+
+    <script src="/javascripts/js/demo.min.js"></script>
+    <script src="/javascripts/js/tabler.min.js"></script>
+  </body>
+</html>

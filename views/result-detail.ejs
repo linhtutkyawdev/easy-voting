@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Result</title>
+    <!-- CSS files -->
+    <link href="/stylesheets/css/tabler.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/demo.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fugaz One"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=DM Serif Text"
+    />
+
+    <style>
+      .font {
+        font-family: "Fugaz One", serif;
+      }
+      .name {
+        font-family: "FDM Serif Text", serif;
+      }
+      .tname {
+        font-family: "FDM Serif Text", serif;
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav start  -->
+    <% include ./partials/nav %>
+    <!-- nav end -->
+
+    <!-- vote result start -->
+    <div id="vote-result" class="card container-xl">
+      <div class="card-header">
+        <h3 class="card-title">Vote Result</h3>
+      </div>
+      <div
+        style="
+          background-image: url('/images/winner-bg.jpg');
+          background-size: cover;
+        "
+      >
+        <div class="row">
+          <div class="col-lg-2 col-md-2"></div>
+          <div
+            class="col-lg-8 col-md-8 col-sm-12"
+            style="padding: 90px 10px 90px 10px"
+          >
+            <% if(camp.status != 'start') { %>
+            <div
+              class="card"
+              style="
+                box-shadow: 0px 3px 20px 10px rgba(221, 223, 102, 0.74);
+                border-radius: 10px;
+                background-color: rgba(244, 247, 188, 0.89);
+              "
+            >
+              <div class="card-title" style="text-align: center">
+                <% if(camp.status == 'close'){ %>
+                <h1 class="pt-2 font">Current Winner</h1>
+                <% }else{ %>
+                <h1 class="pt-2 font">Winner</h1>
+                <% } %>
+                <h2 class="name"><%= campdata[0].name %></h2>
+              </div>
+              <img
+                src="<%= campdata[0].image %>"
+                alt=""
+                style="
+                  width: auto;
+                  height: 600px;
+                  border-bottom-right-radius: 10px;
+                  border-bottom-left-radius: 10px;
+                "
+              />
+            </div>
+            <% }else{ %>
+            <div class="card bg-purple-lt" style="text-align: center">
+              <marquee class="name" style="height: 50px; font-size: 20px"
+                >Not Voting Yet ************ Not Voting Yet ************ Not
+                Voting Yet ************ Not Voting Yet ************ Not Voting
+                Yet ************ Not Voting Yet</marquee
+              >
+            </div>
+            <% } %>
+          </div>
+          <div class="col-lg-2 col-md-2"></div>
+        </div>
+      </div>
+
+      <table class="table card-table table-vcenter">
+        <thead>
+          <tr>
+            <th class="font">Name</th>
+            <th colspan="2" class="font">Voter quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < campdata.length; i++){ %>
+          <tr>
+            <td class="tname"><%= campdata[i].name %></td>
+            <td class="tname"><%= campdata[i].count %></td>
+            <td class="w-50">
+              <% let campcount = camp.vote.length %>
+              <span></span>
+              <% let campdatas = campdata[i].count %>
+              <span></span>
+              <% let result = (campdatas / campcount) * 100 %>
+              <span></span>
+              <% let results = (result == 'Infinity' ? 0 : result) %>
+              <span></span>
+              <div class="progress progress-xs">
+                <div
+                  class="progress-bar bg-primary"
+                  style="width: <%= Math.round(results)? Math.round(results): 0 %>%"
+                >
+                  <%= Math.round(results) %>%
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <!-- vote result end -->
+
+    <!-- footer start  -->
+    <% include ./partials/footer %>
+    <!-- footer end -->
+
+    <script src="/javascripts/js/demo.min.js"></script>
+    <script src="/javascripts/js/tabler.min.js"></script>
+  </body>
+</html>

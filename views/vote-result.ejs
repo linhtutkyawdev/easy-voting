@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Result</title>
+    <!-- CSS files -->
+    <link href="/stylesheets/css/tabler.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/stylesheets/css/demo.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- nav start  -->
+    <% include ./partials/nav %>
+    <!-- nav end -->
+
+    <!-- campaign list start  -->
+    <div id="vote-list" class="card container-xl bg-azure-lt">
+      <div class="card-header">
+        <h3 class="card-title">King & Queen Selection Campaign Result</h3>
+      </div>
+      <div>
+        <div class="list-group-item">
+          <div class="row">
+            <% for(var i = 0; i < king.length; i++) { %>
+            <div
+              class="col-lg-4 col-md-6 col-sm-12 mb-3"
+              style="box-shadow: 0px 10px 10px rgb(184, 119, 238)"
+            >
+              <div class="card">
+                <img src="<%= king[i].image %>" alt="" />
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <h1><%= king[i].title %></h1>
+                    <h3>Create Date</h3>
+                    <span><%= king[i].create %></span>
+                  </div>
+                  <div class="col-3">
+                    <a href="/result-detail/<%= king[i].id %>">
+                      <input
+                        type="button"
+                        value="Result"
+                        class="btn btn-primary"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- project -->
+    <div id="vote-list" class="card container-xl bg-azure-lt">
+      <div class="card-header">
+        <h3 class="card-title">Project Competition Campaign Result</h3>
+      </div>
+      <div>
+        <div class="list-group-item">
+          <div class="row">
+            <% for(var k = 0; k < project.length; k++){ %>
+            <div
+              class="col-lg-4 col-md-6 col-sm-12 mb-3"
+              style="box-shadow: 0px 10px 10px rgb(184, 119, 238)"
+            >
+              <div class="card">
+                <img src="<%= project[k].image %>" alt="" />
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <h1><%= project[k].title %></h1>
+                    <h3>Create Date</h3>
+                    <span><%= project[k].create %></span>
+                  </div>
+                  <div class="col-3">
+                    <a href="/result-detail/<%= project[k].id %>">
+                      <input
+                        type="button"
+                        value="Result"
+                        class="btn btn-primary"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- other  -->
+
+    <div id="vote-list" class="card container-xl bg-azure-lt">
+      <div class="card-header">
+        <h3 class="card-title">Other Campaign Result</h3>
+      </div>
+      <div>
+        <div class="list-group-item">
+          <div class="row">
+            <% for(var j = 0; j < other.length; j++) { %>
+            <div
+              class="col-lg-4 col-md-6 col-sm-12 mb-3"
+              style="box-shadow: 0px 10px 10px rgb(184, 119, 238)"
+            >
+              <div class="card">
+                <img src="<%= other[j].image %>" alt="" />
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <h1><%= other[j].title %></h1>
+                    <h3>Create Date</h3>
+                    <span><%= other[j].create %></span>
+                  </div>
+                  <div class="col-3">
+                    <a href="/result-detail/<%= other[j].id %> ">
+                      <input
+                        type="button"
+                        value="Result"
+                        class="btn btn-primary"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer start  -->
+    <% include ./partials/footer %>
+    <!-- footer end -->
+
+    <script src="/javascripts/js/demo.min.js"></script>
+    <script src="/javascripts/js/tabler.min.js"></script>
+  </body>
+</html>

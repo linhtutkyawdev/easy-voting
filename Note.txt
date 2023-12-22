@@ -1,0 +1,9 @@
+folder -cmd open
+>pnpm run dev
+at browser- localhost:3000 or http://easyvote-ucspyay.glitch.me
+for Admin- localhost:3000/admin
+username- admin@gmail.com
+password- admin
+
+user-linhtutkyaw@ucspyay.edu.mm
+password-12345678

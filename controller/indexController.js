@@ -1,12 +1,12 @@
 require("dotenv").config();
-const nodemailer = require("nodemailer");
 const User = require("../model/user");
 const Campaign = require("../model/campaign");
 const CampaignData = require("../model/campaignData");
-const SMTPConnection = require("nodemailer/lib/smtp-connection");
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
-const CronJob = require("cron").CronJob;
+const postmark = require("postmark");
+
+var client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN);
 
 exports.index = (req, res) => {
   Campaign.find({ select: "1" })
@@ -72,41 +72,21 @@ exports.loadLogin = (req, res) => {
 // for normal send verify mail
 const sendVerifyMail = async (name, email, User_id) => {
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: process.env.USER_EMAIL,
-        pass: process.env.PASSWORD,
-      },
-      tls: {
-        ciphers: "SSLv3",
-      },
-    });
-
-    const mailOptions = {
-      from: `Easy Vote${process.env.USER_EMAIL}`,
-      to: email,
-      subject: "For Email Verification",
-      html:
+    client.sendEmail({
+      From: process.env.USER_EMAIL,
+      To: email,
+      Subject: "For Email Verification",
+      HtmlBody:
         "<h1 style='color:#3C84AB;'>Welcome to Easy Vote</h1>" +
         "<p> <h3>Hi, " +
         name +
         "</h3>" +
         "<h3>You need to verify your account to login.So click " +
-        "<a href='http://127.0.0.1:3000/verify-login?id=" +
+        "<a href='http://" +
+        process.env.URL +
+        "/verify-login?id=" +
         User_id +
         "'>verify</a> and confirm your email. </h3>",
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email has been sent:- ", info.response);
-      }
     });
   } catch (error) {
     console.log(error.message);
@@ -167,38 +147,20 @@ exports.loadSignUp = async (req, res) => {
 
 const sendforgetPassword = async (name, email, id) => {
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: process.env.USER_EMAIL,
-        pass: process.env.PASSWORD,
-      },
-      tls: {
-        ciphers: "SSLv3",
-      },
-    });
-    const mailOptions = {
-      from: "Easy Vote<process.env.USER_EMAIL>",
-      to: email,
-      subject: "Forget password",
-      html:
+    client.sendEmail({
+      From: process.env.USER_EMAIL,
+      To: email,
+      Subject: "For Email Verification",
+      HtmlBody:
         "<h1 style='color:#3C84AB;'>Welcome to Easy Vote</h1>" +
         "<p> <h3>Hi " +
         name +
         "</h3>" +
-        ',Click reset password to <a href="http://127.0.0.1:3000/reset-password?token=' +
+        ',Click reset password to <a href="http://' +
+        process.env.URL +
+        "/reset-password?token=" +
         id +
         '">create a new password</a></p>',
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email has been sent:- ", info.response);
-      }
     });
   } catch (error) {
     console.log(error.message);

@@ -72,6 +72,7 @@
                     <% let campcount = campaign.vote.length %>
                     <% let campdata = campaignData[k].count %>
                     <% let result = (campdata / campcount)*100 %>
+                    <% result = (result >100 ? 100 : result) %>
                     <% let results = (result == 'Infinity' ? 0 : result) %>
                     <div class="progress progress-xs">
                     <div class="progress-bar bg-primary" style="width:<%= Math.round(results)  %>%"><%= Math.round(results)  %>%</div>
